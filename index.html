@@ -8,13 +8,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#081022; --paper:#ffffff; --ink:#0b0f19; --title:#e11d48; }
-    body{ font-family:"Nunito", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:white; }
+    :root{ --bg:#0b0d18; --paper:#e9e9e9; --ink:#0b0f19; --title:#ff4040; }
+    *{box-sizing:border-box}
+    body{ margin:0; color:white; background: var(--bg); font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
 
-    /* starry sky */
-    .sky{ position:fixed; inset:0; background: radial-gradient(1200px 700px at 50% -10%, #0e1b3a 0%, #081022 40%, #050910 100%); overflow:hidden; }
+    /* Starry night + snow */
+    .sky{ position:fixed; inset:0; background: radial-gradient(1200px 700px at 50% -10%, #111a36 0%, #0b0d18 45%, #070a14 100%); overflow:hidden; z-index:0 }
     .stars::before, .stars::after{ content:""; position:absolute; inset:-100px; background-image:
       radial-gradient(2px 2px at 20px 40px,#fff,transparent),
       radial-gradient(2.5px 2.5px at 120px 180px,#fff,transparent),
@@ -26,53 +27,44 @@
       radial-gradient(2.2px 2.2px at 760px 60px,#fff,transparent),
       radial-gradient(2px 2px at 860px 260px,#fff,transparent),
       radial-gradient(2px 2px at 960px 160px,#fff,transparent);
-      animation: starDrift 24s linear infinite; opacity:.7; }
-    .stars::after{ animation-duration: 36s; opacity:.45; }
+      animation: starDrift 24s linear infinite; opacity:.75 }
+    .stars::after{ animation-duration: 36s; opacity:.5 }
     @keyframes starDrift{ from{ transform: translateY(-40px) } to{ transform: translateY(40px) } }
 
-    /* Falling snow overlay */
-    .snow, .snow::before, .snow::after{ position:fixed; pointer-events:none; inset:0; content:""; }
+    .snow, .snow::before, .snow::after{ position:fixed; pointer-events:none; inset:0; content:""; z-index:1 }
     .snow{ background-image:
-      radial-gradient(2px 2px at 10% 20%, #fff, transparent),
-      radial-gradient(2px 2px at 30% 80%, #fff, transparent),
-      radial-gradient(3px 3px at 70% 10%, #fff, transparent),
-      radial-gradient(2px 2px at 90% 50%, #fff, transparent),
-      radial-gradient(3px 3px at 50% 30%, #fff, transparent);
-      animation: snowFall 12s linear infinite; opacity:.7; }
-    .snow::before{ background-image:
-      radial-gradient(2px 2px at 15% 10%, #fff, transparent),
-      radial-gradient(3px 3px at 45% 60%, #fff, transparent),
-      radial-gradient(2px 2px at 80% 30%, #fff, transparent),
-      radial-gradient(3px 3px at 65% 90%, #fff, transparent);
-      animation: snowFall 18s linear infinite; opacity:.55; }
-    .snow::after{ background-image:
-      radial-gradient(2px 2px at 25% 40%, #fff, transparent),
-      radial-gradient(3px 3px at 55% 15%, #fff, transparent),
-      radial-gradient(2px 2px at 75% 70%, #fff, transparent),
-      radial-gradient(3px 3px at 35% 85%, #fff, transparent);
-      animation: snowFall 28s linear infinite; opacity:.45; }
+      radial-gradient(1.5px 1.5px at 10% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 30% 80%, #fff, transparent),
+      radial-gradient(2px 2px at 70% 10%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 90% 50%, #fff, transparent),
+      radial-gradient(2px 2px at 50% 30%, #fff, transparent);
+      animation: snowFall 14s linear infinite; opacity:.8 }
+    .snow::before{ animation: snowFall 20s linear infinite; opacity:.6; background-image:
+      radial-gradient(1.5px 1.5px at 15% 10%, #fff, transparent),
+      radial-gradient(2px 2px at 45% 60%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 30%, #fff, transparent),
+      radial-gradient(2px 2px at 65% 90%, #fff, transparent) }
+    .snow::after{ animation: snowFall 30s linear infinite; opacity:.45; background-image:
+      radial-gradient(1.5px 1.5px at 25% 40%, #fff, transparent),
+      radial-gradient(2px 2px at 55% 15%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 75% 70%, #fff, transparent),
+      radial-gradient(2px 2px at 35% 85%, #fff, transparent) }
     @keyframes snowFall{ from{ background-position: 0 -200px } to{ background-position: 0 200px } }
 
-    /* paper */
-    .paper{
-      background: var(--paper);
-      color: var(--ink);
-      width:min(680px, 92vw);
-      min-height: 70vh;
-      border-radius: 18px 18px 28px 28px;
-      margin: 70px auto 0;
-      box-shadow: 0 30px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(0,0,0,.08);
-      padding: 28px 22px 34px;
-    }
-    .title{ font-family:"Fredoka", sans-serif; color:var(--title); text-align:center; font-weight:900; letter-spacing:1px; }
-    .listline{ font-weight:900; font-size: clamp(26px, 4.4vw, 44px); line-height:1.1; margin: 18px 8px; word-break: break-word; }
-    .meta{ color:#6b7280; font-size:12px; font-weight:700 }
+    /* Pixel paper */
+    .paper{ background: var(--paper); color: var(--ink); width:min(720px, 92vw); min-height: 60vh; border:4px solid #000; box-shadow: 0 0 0 4px #fff inset, 0 20px 50px rgba(0,0,0,.6); margin:60px auto 0; padding:34px 24px 40px; image-rendering: pixelated; border-radius: 12px }
+    .title{ font-family:'Press Start 2P', monospace; color:var(--title); text-align:center; font-size:20px; text-shadow:2px 2px #000 }
+    .listline{ font-family:'Press Start 2P', monospace; font-size:14px; line-height:1.35; margin:16px 6px; text-transform:uppercase; letter-spacing:1px; word-break:break-word }
+    .meta{ color:#6b7280; font-size:11px; font-weight:800; text-align:center }
 
-    /* form */
-    .wob{ border:3px solid #fff; box-shadow:0 0 0 3px #000 inset, 0 6px 0 rgba(0,0,0,.25); border-radius:18px; }
-    .wob:focus{ outline:none; box-shadow:0 0 0 3px #000 inset, 0 0 0 4px #fff, 0 8px 0 rgba(0,0,0,.25) }
+    /* Pixel inputs */
+    .wob{ border:3px solid #000; border-radius:6px; background:#fff; color:#000; font-family:'Press Start 2P', monospace; image-rendering: pixelated }
+    .wob:focus{ outline:none; box-shadow:0 0 0 3px #000 inset, 0 0 0 3px #fff }
+    .pill{ border-radius:8px }
 
-    .pill{ border-radius:9999px }
+    /* Header overrides */
+    .leadline{ font-family:'Press Start 2P', monospace; text-transform:uppercase; text-shadow:3px 3px #000 }
+    .bigbtn{ font-family:'Press Start 2P', monospace; image-rendering:pixelated; border:3px solid #000; border-radius:8px }
   </style>
 </head>
 <body class="min-h-screen">
@@ -81,36 +73,36 @@
 
   <!-- HEADER -->
   <header class="relative z-10 max-w-6xl mx-auto px-4 pt-8 pb-4 flex items-center justify-between">
-  <div class="flex-1 pr-4">
-    <p class="font-black leading-tight text-3xl md:text-4xl lg:text-5xl">Write your wish · See it on the big paper</p>
-  </div>
-  <nav class="flex items-center gap-3">
-    <a id="buyLink" href="#" class="px-6 md:px-8 py-3 md:py-4 pill bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xl md:text-2xl shadow-lg">Buy $LIST</a>
-    <a id="dexLink" href="#" class="px-6 md:px-8 py-3 md:py-4 pill bg-white/10 hover:bg-white/20 text-white font-extrabold text-xl md:text-2xl shadow">Dexscreener</a>
-    <a id="xLink" href="#" class="px-6 md:px-8 py-3 md:py-4 pill bg-white text-black font-extrabold text-xl md:text-2xl shadow">𝕏</a>
-  </nav>
-</header>
+    <div class="flex-1 pr-4">
+      <p class="leadline font-black leading-tight text-2xl md:text-3xl lg:text-4xl">Write your wish · See it on the big paper</p>
+    </div>
+    <nav class="flex items-center gap-3">
+      <a id="buyLink" href="#" class="bigbtn px-5 md:px-7 py-3 md:py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-lg md:text-xl shadow-lg">Buy $LIST</a>
+      <a id="dexLink" href="#" class="bigbtn px-5 md:px-7 py-3 md:py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold text-lg md:text-xl shadow">Dexscreener</a>
+      <a id="xLink" href="#" class="bigbtn px-5 md:px-7 py-3 md:py-4 bg-white text-black font-extrabold text-lg md:text-xl shadow">𝕏</a>
+    </nav>
+  </header>
 
-  <!-- PAPER (no green hands) -->
+  <!-- PAPER -->
   <main class="relative z-10">
     <section class="paper relative">
-      <h2 class="title text-4xl">WISH LIST</h2>
-      <div id="list" class="mt-3"><!-- Lines injected here --></div>
-      <div class="meta mt-6 text-center">Newest wishes appear at the top · Keep it fun & kind</div>
+      <h2 class="title">WISH LIST</h2>
+      <div id="list" class="mt-3"></div>
+      <div class="meta mt-6">Newest wishes appear at the top · Keep it fun & kind</div>
     </section>
 
     <!-- FORM -->
     <section class="max-w-3xl mx-auto px-4 py-8">
       <form id="wishForm" class="grid gap-3">
         <div class="grid sm:grid-cols-2 gap-3">
-          <input id="handle" class="wob bg-white/90 text-black px-4 py-3" placeholder="Your name / @handle (optional)" maxlength="28" />
-          <input id="wallet" class="wob bg-white/90 text-black px-4 py-3" placeholder="Wallet address (optional)" maxlength="64" />
+          <input id="handle" class="wob px-4 py-3" placeholder="YOUR NAME (OPTIONAL)" maxlength="28" />
+          <input id="wallet" class="wob px-4 py-3" placeholder="WALLET ADDRESS (OPTIONAL)" maxlength="64" />
         </div>
-        <textarea id="wish" class="wob bg-white/90 text-black px-4 py-3 min-h-[92px]" placeholder="I wish for…" maxlength="180" required></textarea>
+        <textarea id="wish" class="wob px-4 py-3 min-h-[92px]" placeholder="I WISH FOR..." maxlength="180" required></textarea>
         <div class="flex items-center justify-between gap-3 flex-wrap">
-          <label class="text-white/80 text-sm flex items-center gap-2"><input id="anon" type="checkbox" class="scale-110"> Post as Anonymous</label>
+          <label class="text-white/80 text-xs md:text-sm flex items-center gap-2"><input id="anon" type="checkbox" class="scale-110"> Post as Anonymous</label>
           <div class="flex items-center gap-2">
-            <button type="submit" class="px-6 py-3 pill bg-rose-600 hover:bg-rose-500 text-white font-black">Add to List</button>
+            <button type="submit" class="bigbtn px-5 md:px-6 py-3 bg-rose-600 hover:bg-rose-500 text-white font-black">ADD TO LIST</button>
           </div>
         </div>
         <p id="status" class="hidden text-sm"></p>
@@ -120,115 +112,68 @@
     <footer class="pb-10 text-center text-white/60">$LIST · Christmas list for the trenches</footer>
   </main>
 
-  <!-- LIVE LOGIC (Firebase optional + local fallback) -->
+  <!-- FIREBASE (kept as you provided) -->
   <script type="module">
-    // ---- Links (optional) ----
-    const LINKS = { buy:'#', dex:'#', x:'#' };
-    const buyLink=document.getElementById('buyLink'); if (LINKS.buy && LINKS.buy !== '#') { buyLink.href=LINKS.buy; buyLink.classList.remove('hidden'); }
-    const dexLink=document.getElementById('dexLink'); if (LINKS.dex && LINKS.dex !== '#') { dexLink.href=LINKS.dex; dexLink.classList.remove('hidden'); }
-    const xLink=document.getElementById('xLink'); if (LINKS.x && LINKS.x !== '#') xLink.href=LINKS.x;
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+    import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query, limit } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
-    // ---- Firebase config (fill to enable realtime between users) ----
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDtFn2XOc-lTyc1NsgmVUpJtsX5K5gWFbU",
+      authDomain: "listcoin.firebaseapp.com",
+      projectId: "listcoin",
+      storageBucket: "listcoin.firebasestorage.app",
+      messagingSenderId: "536619458443",
+      appId: "1:536619458443:web:94a22b7056b553d97f598e",
+      measurementId: "G-2C7Z4GN687"
     };
-    const hasFirebase = firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY';
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
     const form = document.getElementById('wishForm');
     const listEl = document.getElementById('list');
     const statusEl = document.getElementById('status');
+    const wishesCol = collection(db, 'wishes');
 
-    // small client limit
-    const RATE_LIMIT_SECONDS = 30;
-    function canPost(){ const last=+localStorage.getItem('listcoin_last_post')||0; return (Date.now()-last)/1000>RATE_LIMIT_SECONDS }
-    function markPost(){ localStorage.setItem('listcoin_last_post', String(Date.now())) }
+    async function addWish(wish, handle, wallet, anon) {
+      await addDoc(wishesCol, { wish, handle, wallet, anon, createdAt: serverTimestamp() });
+    }
 
-    // Light word mask
-    const BAD = ['fuck','bitch'];
-    const mask = t=>BAD.reduce((s,w)=>s.replace(new RegExp(w,'ig'),'***'), t.trim());
-
-    // Render a line like the image
     function makeLine(text){
       const el = document.createElement('div');
       el.className='listline';
-      el.textContent = text;
+      el.textContent=text;
       return el;
     }
 
-    function renderLocal(){
+    function renderSnapshot(snapshot){
       listEl.innerHTML='';
-      const arr = JSON.parse(localStorage.getItem('listcoin_wishes')||'[]').sort((a,b)=>b.createdAt-a.createdAt);
-      // No default seed lines
-      for (const w of arr.slice(0,12)){
-        listEl.appendChild(makeLine(w.wish));
-      }
+      snapshot.forEach(doc=>{
+        const data=doc.data();
+        if(data.wish) listEl.appendChild(makeLine(data.wish));
+      });
     }
 
-    function saveLocal(obj){
-      const arr = JSON.parse(localStorage.getItem('listcoin_wishes')||'[]');
-      arr.push(obj); localStorage.setItem('listcoin_wishes', JSON.stringify(arr));
-    }
-
-    // Firebase live init (optional)
-    let useFirebase=false, wishesCol, addDoc, serverTimestamp, onSnapshot, orderBy, query, limit, getDocs;
-    if (hasFirebase){
-      try{
-        const appMod = await import('https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js');
-        const fsMod  = await import('https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js');
-        const app = appMod.initializeApp(firebaseConfig);
-        const db = fsMod.getFirestore(app);
-        wishesCol = fsMod.collection(db,'wishes');
-        ({ addDoc, serverTimestamp, onSnapshot, orderBy, query, limit, getDocs } = fsMod);
-        useFirebase=true;
-      }catch(e){ console.warn('Firebase unavailable, using local mode.', e) }
-    }
-
-    async function mount(){
-      if (useFirebase){
-        const qLatest = query(wishesCol, orderBy('createdAt','desc'), limit(50));
-        onSnapshot(qLatest, snap=>{
-          const items=[]; snap.forEach(d=> items.push({ wish: d.data().wish||'', createdAt: d.data().createdAt?.toDate?.()?.getTime?.()||Date.now() }));
-          listEl.innerHTML='';
-          items.forEach(x=> listEl.appendChild(makeLine(x.wish)) );
-        });
-      } else {
-        renderLocal();
-      }
-    }
+    const qLatest = query(wishesCol, orderBy('createdAt','desc'), limit(50));
+    onSnapshot(qLatest, renderSnapshot);
 
     form.addEventListener('submit', async (e)=>{
       e.preventDefault();
-      const wish = mask(document.getElementById('wish').value).slice(0,180);
-      const handle = mask(document.getElementById('handle').value).slice(0,28);
-      const wallet = mask(document.getElementById('wallet').value).slice(0,64);
-      const anon   = document.getElementById('anon').checked;
-      if (!wish) return;
-      if (!canPost()) { show('Please wait a bit between wishes.', true); return; }
-
-      try{
-        show('Adding your wish…');
-        if (useFirebase){
-          await addDoc(wishesCol, { wish, handle: anon? '' : handle, wallet, anon, createdAt: serverTimestamp() });
-        } else {
-          saveLocal({ wish, handle: anon? '' : handle, wallet, anon, createdAt: Date.now() });
-          renderLocal();
-        }
-        form.reset(); markPost(); show('✨ Wish added!', false, 1600);
-      }catch(err){ console.error(err); show('Could not add wish.', true); }
+      const wish=document.getElementById('wish').value.trim();
+      const handle=document.getElementById('handle').value.trim();
+      const wallet=document.getElementById('wallet').value.trim();
+      const anon=document.getElementById('anon').checked;
+      if(!wish) return;
+      try {
+        await addWish(wish, handle, wallet, anon);
+        form.reset();
+        statusEl.textContent='✨ Wish added!';
+        setTimeout(()=>statusEl.textContent='',1500);
+      } catch(err){
+        console.error(err);
+        statusEl.textContent='Failed to add wish.';
+      }
     });
-
-    function show(msg, bad=false, hide=0){
-      statusEl.classList.remove('hidden');
-      statusEl.textContent=msg; statusEl.className = bad? 'mt-2 text-sm text-rose-400' : 'mt-2 text-sm text-emerald-400';
-      if (hide) setTimeout(()=>statusEl.classList.add('hidden'), hide);
-    }
-
-    mount();
   </script>
 </body>
 </html>
